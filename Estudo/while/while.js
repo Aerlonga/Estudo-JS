@@ -14,3 +14,7 @@ while (rand <= 49){
     console.log(rand)
     rand ++;
 };
+while (rand <= 49){
+    console.log(rand)
+    rand ++;
+};
