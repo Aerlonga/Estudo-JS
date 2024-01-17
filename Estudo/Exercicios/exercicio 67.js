@@ -32,6 +32,7 @@ function criaTarefa(textoInput) { // função que vai receber o for escrito dent
     tarefas.appendChild(li) // função appendchild vai jogar o que foi escrito dentro das li (listas) gerando as tarefas
     limpaInput(); // toda vez que adicionar o item a lista, o input vai limpar, apagar o que foi escrito
     criBotaoApagar(li);
+    salvarTarefas();
 };
 
 criBotaoApagar = (li) => {
@@ -44,12 +45,34 @@ criBotaoApagar = (li) => {
     
 };
 
-document.addEventListener("click", (e) =>{
-    const el = e.target;
-    if (el.classList.contains("apagar")){
-        el.parentElement.remove();
+document.addEventListener("click", (e) =>{ // Adiciona um evento de clique ao documento
+    const el = e.target;    // Obtém o elemento clicado
+    if (el.classList.contains("apagar")){  // Verifica se o elemento clicado tem a classe "apagar"
+        el.parentElement.remove();  // Remove o elemento pai (parent) do elemento clicado (o botão)
+        salvarTarefas();
     };
 });
 
+salvarTarefas = () =>{
+    const liTarefas = tarefas.querySelectorAll("li");  // Seleciona todos os elementos de lista (li) dentro do elemento com id "tarefas"
+    const listaDeTarefas = []; // Cria uma array para armazenar as strings de texto das tarefas
+    
+    for (let tarefa of liTarefas){  // Itera sobre cada elemento de lista
+        let tarefaTexto = tarefa.innerText;   // Obtém o texto da tarefa
+        tarefaTexto = tarefaTexto.replace("apagar", "").trim(); // Remove a palavra "apagar" do texto da tarefa
+        listaDeTarefas.push(tarefaTexto);
+    }
 
+    const tarefasJSON = JSON.stringify(listaDeTarefas);
+    localStorage.setItem("tarefas", tarefasJSON)
+};
+
+adicionaTarefasSalvas = () =>{
+    const tarefas = localStorage.getItem("tarefas");
+    const listaDeTarefas = JSON.parse(tarefas);
+    for (let tarefa of listaDeTarefas){
+        criaTarefa(tarefa);
+    };
+};
+adicionaTarefasSalvas();
 
