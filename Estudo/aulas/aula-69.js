@@ -1,6 +1,6 @@
 // function funcao(){
 //     let total = 0;
-//     for (argumento of arguments){ // arguments é uma "macete" do js que le os argumentos da função declarado na hora que chama a função
+//     for (argumento of arguments){ // arguments é uma "macete" do js que le os argumentos da função declarado na hora que chama a função, não funciona em arrow function "=>"
 //         total += argumento;
 //     }
 //     console.log(total);
@@ -35,16 +35,32 @@
 // n();
 
 
-function conta(operador, acumulador, ...numeros) { // "..." significa rest operator, ou seja, tudo que estiver depois dos outros parametros, o resto, vai entrar em número
-    for (let numero of numeros) {
-        if (operador === "+") acumulador += numero
-        if (operador === "-") acumulador -= numero
-        if (operador === "/") acumulador /= numero
-        if (operador === "*") acumulador *= numero
-    };
-    console.log(acumulador)
+// function conta(operador, acumulador, ...numeros) { // "..." significa rest operator, ou seja, tudo que estiver depois dos outros parametros, o resto, vai entrar em número
+    // for (let numero of numeros) {
+//         if (operador === "+") acumulador += numero
+//         if (operador === "-") acumulador -= numero
+//         if (operador === "/") acumulador /= numero
+//         if (operador === "*") acumulador *= numero
+//     };
+//     console.log(acumulador)
+// };
+
+// conta("*", 1, 20, 30, 40, 50);
+
+
+// const conta = function(operador, acumulador, ...numeros) {
+//     for (let numero of numeros) {
+//         if (operador === "+") acumulador += numero
+//         if (operador === "-") acumulador -= numero
+//         if (operador === "/") acumulador /= numero
+//         if (operador === "*") acumulador *= numero
+//     };
+//     console.log(acumulador)
+// };
+
+// conta("+", 1, 20, 30, 40, 50);
+
+const conta = (...args) => { // "args" + ... (rest operate) le tudo, se tirar, so lê o primeiro parametro
+    console.log(args);
 };
-
-conta("/", 1, 20, 30, 40, 50);
-
-
+conta("+", 1, 20, 30, 40, 50);
